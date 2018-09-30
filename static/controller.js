@@ -4,11 +4,18 @@ new Vue({
     return {
       userName: '',
       tempUserName: '',
-      socket: undefined
+      socket: undefined,
+      usersConnected: []
     }
   },
+  created(){
+    this.socket = io.connect('http://' + document.domain + ':' + location.port);
+  },
   mounted(){
-    this.socket = io.connect('http://127.0.0.1:5000');
+    this.socket.on('user-connected', (response)=> {
+      this.usersConnected.push(response)
+    })
+    axios.get('http://127.0.0.1:5000/users').then(response => (this.usersConnected = response));
   },
   methods:{
     login(){

@@ -6,9 +6,21 @@
     <title>Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <style>
       #form{
         justify-content: center;
+      }
+      .my-footer{
+        margin: 5px;
+      }
+      
+      #send{
+        cursor: pointer;
+      }
+
+      #send:hover{
+        color: green;
       }
     </style>
   </head>
@@ -29,20 +41,26 @@
       </section>
       <section class="hero is-fullheight" v-else>
         <div class="hero-body">
-
+          <!-- <ul>
+            <li v-for="user in usersConnected">{{user.user}}</li>
+          </ul> -->
         </div>
-        <footer class="footer">
-          <div class="content">
-          </div>
-        </footer>
+        <div class="my-footer">
+          <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Escriba su mensaje...">
+              <span class="icon is-small is-right">
+                <i id="send" class="fas fa-paper-plane"></i>
+              </span>
+            </p>
+            </div>
+        </div>
       </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://' + document.domain + ':' + location.port);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="%% url_for('static', filename='controller.js') %%"></script>
   </body>
 </html>
