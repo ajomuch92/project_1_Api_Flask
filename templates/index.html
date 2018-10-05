@@ -34,8 +34,12 @@
         </div>
       </section>
       <section class="hero is-fullheight" v-else>
-        <div class="hero-body">
-
+        <div style="padding: 20px; ">
+          <div v-for="msg in messages" :class="[msg.user == user? 'has-text-right': 'has-text-left']" >
+            <span style="background-color:gray;">
+              {{msg.user}}: {{msg.text}}
+            </span>
+          </div>
         </div>
         <div id="footer">
           <input class="input" type="text" placeholder="Escriba su mensaje..." v-model="message">

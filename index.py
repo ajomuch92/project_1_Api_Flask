@@ -24,10 +24,11 @@ def messages_handler():
   if request.method == 'POST':
     message = request.get_json(silent=True)
     inserted = conn.insert_message(message)
-    return inserted
+    if inserted:
+      socketio.emit('new-message', message)
+    return str(inserted)
   elif request.method == 'GET':
     result = conn.get_messages()
-    print(result)
     return json.dumps(result)
 
 @socketio.on('on-connect')

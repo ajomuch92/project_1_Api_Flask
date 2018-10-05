@@ -6,7 +6,8 @@ new Vue({
       tempUserName: '',
       socket: undefined,
       usersConnected: [],
-      message: ''
+      message: '',
+      messages: []
     }
   },
   created(){
@@ -16,9 +17,15 @@ new Vue({
     this.socket.on('user-registered', (data) => {
       this.usersConnected.push(data);
     });
+    this.socket.on('new-message', (data) => {
+      this.messages.push(data);
+    });
     axios.get('http://127.0.0.1:5000/users').then(response => {
       this.usersConnected = response.data
-    })
+    });
+    axios.get('http://127.0.0.1:5000/messages').then(response => {
+      this.messages = response.data
+    });
   },
   methods:{
     login(){

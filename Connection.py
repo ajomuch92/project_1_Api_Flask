@@ -8,7 +8,17 @@ class Connection():
   def get_messages(self):
     connection = sqlite3.connect('./mensajes.db')
     result = connection.execute('SELECT * FROM mensajes')
-    return result.fetchall()
+    rows = result.fetchall()
+    records = []
+    for row in rows:
+      record = {
+        'id': row[0],
+        'user': row[1],
+        'text': row[2],
+        'date': row[3]
+      }
+      records.append(record)
+    return records
   
   def insert_message(self, message):
     try:
