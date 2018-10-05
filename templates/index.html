@@ -6,15 +6,21 @@
     <title>Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <style>
       #form{
         justify-content: center;
+      }
+      #footer{
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <section class="hero is-fullheight" v-if="!userName">
+      <section class="hero is-fullheight" v-if="!user">
         <div id="form" class="hero-body">
           <div class="has-text-centered box">
             <h1 class="title">Bienvenido</h1>
@@ -31,18 +37,16 @@
         <div class="hero-body">
 
         </div>
-        <footer class="footer">
-          <div class="content">
-          </div>
-        </footer>
+        <div id="footer">
+          <input class="input" type="text" placeholder="Escriba su mensaje..." v-model="message">
+          <button class="button" @click="sendMessage">Enviar</button>
+        </div>
       </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://' + document.domain + ':' + location.port);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="%% url_for('static', filename='controller.js') %%"></script>
   </body>
 </html>
