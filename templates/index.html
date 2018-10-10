@@ -11,22 +11,16 @@
       #form{
         justify-content: center;
       }
-      .my-footer{
-        margin: 5px;
-      }
-      
-      #send{
-        cursor: pointer;
-      }
-
-      #send:hover{
-        color: green;
+      #footer{
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <section class="hero is-fullheight" v-if="!userName">
+      <section class="hero is-fullheight" v-if="!user">
         <div id="form" class="hero-body">
           <div class="has-text-centered box">
             <h1 class="title">Bienvenido</h1>
@@ -40,20 +34,16 @@
         </div>
       </section>
       <section class="hero is-fullheight" v-else>
-        <div class="hero-body">
-          <!-- <ul>
-            <li v-for="user in usersConnected">{{user.user}}</li>
-          </ul> -->
+        <div style="padding: 20px; ">
+          <div v-for="msg in messages" :class="[msg.user == user? 'has-text-right': 'has-text-left']" >
+            <span style="background-color:gray;">
+              {{msg.user}}: {{msg.text}}
+            </span>
+          </div>
         </div>
-        <div class="my-footer">
-          <div class="field">
-            <p class="control has-icons-left has-icons-right">
-              <input class="input" type="text" placeholder="Escriba su mensaje...">
-              <span class="icon is-small is-right">
-                <i id="send" class="fas fa-paper-plane"></i>
-              </span>
-            </p>
-            </div>
+        <div id="footer">
+          <input class="input" type="text" placeholder="Escriba su mensaje..." v-model="message">
+          <button class="button" @click="sendMessage">Enviar</button>
         </div>
       </section>
     </div>
